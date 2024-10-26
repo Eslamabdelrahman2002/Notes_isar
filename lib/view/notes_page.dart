@@ -22,11 +22,11 @@ class _NotesPageState extends State<NotesPage> {
     readNotes();
   }
 
-  @override
-  void dispose() {
-    textController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   textController.dispose();
+  //   super.dispose();
+  // }
 
   void readNotes() {
     context.read<NoteDatabase>().fetchNotes();

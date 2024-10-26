@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:popover/popover.dart';
+
+import 'note_setting.dart';
 
 class NoteTitle extends StatelessWidget {
   const NoteTitle({
@@ -26,19 +29,28 @@ class NoteTitle extends StatelessWidget {
           text,
           overflow: TextOverflow.ellipsis, // Handles long text overflow
         ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min, // Ensures row takes up minimal space
-          children: [
-            IconButton(
-              onPressed: onEditPressed,
-              icon: const Icon(Icons.edit),
-            ),
-            IconButton(
-              onPressed: onDeletePressed,
-              icon: const Icon(Icons.delete),
-            ),
-          ],
-        ),
+        trailing:Builder(
+          builder: (context)=> Row(
+            mainAxisSize: MainAxisSize.min, // Ensures row takes up minimal space
+            children: [
+              IconButton(
+                onPressed:() =>showPopover(
+                    width: 100,
+                    height: 100,
+                    context: context,
+                    backgroundColor: Theme.of(context).colorScheme.background,
+                    bodyBuilder: (context)=>NoteSetting(
+                      editTap: onEditPressed,
+                      deleteTap: onDeletePressed,)),
+                icon: const Icon(Icons.more_vert),
+              ),
+              // IconButton(
+              //   onPressed: onDeletePressed,
+              //   icon: const Icon(Icons.delete),
+              // ),
+            ],
+          ),
+        )
       ),
     );
   }
